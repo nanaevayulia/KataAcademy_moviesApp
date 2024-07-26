@@ -1,0 +1,23 @@
+.card-list-item {
+    display: flex;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, .15);
+    height: 280px;
+}
+
+.card-img {
+    min-width: 183px;
+    max-width: 183px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.card-overview {
+    font-size: 12px;
+}
