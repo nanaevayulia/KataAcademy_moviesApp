@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import { format } from 'date-fns';
+import { Spin, Alert } from 'antd';
 
 import MoviesDB from '../../services/moviesDB';
 import CardList from '../card-list';
 
 import noPoster from './no_poster.jpg';
-
 import './app.css';
 
 export default class App extends Component {
@@ -14,6 +14,8 @@ export default class App extends Component {
     query: 'return',
     numberPage: 1,
     totalPages: 0,
+    loading: true,
+    error: false,
   };
 
   constructor() {
@@ -54,21 +56,42 @@ export default class App extends Component {
     const database = new MoviesDB();
     const { query, numberPage } = this.state;
 
-    database.getMovies(query, numberPage).then((movies) => {
-      this.setState({
-        totalPages: movies.total_pages,
-        numberPage,
-      });
-      movies.results.forEach((movie) => {
-        this.addItem(movie);
-      });
-    });
+    database
+      .getMovies(query, numberPage)
+      .then((movies) => {
+        this.setState({
+          totalPages: movies.total_pages,
+          numberPage,
+          loading: false,
+        });
+        movies.results.forEach((movie) => {
+          this.addItem(movie);
+        });
+      })
+      .catch(this.onError);
   }
 
+  onError = () => {
+    this.setState({ error: true, loading: false });
+  };
+
   render() {
+    const { movies, loading, error } = this.state;
+
+    const hasData = !(loading || error);
+    const err = (
+      <Alert message="Ошибка!" description="К сожалению, запрашиваемая вами страница не найдена..." type="error" />
+    );
+
+    const errorMessage = error ? err : null;
+    const spin = loading ? <Spin size="large" /> : null;
+    const content = hasData ? <CardList moviesData={movies} /> : null;
+
     return (
       <div className="container">
-        <CardList moviesData={this.state.movies} />
+        {errorMessage}
+        {spin}
+        {content}
       </div>
     );
   }

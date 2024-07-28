@@ -13,12 +13,17 @@ export default class MoviesDB {
   };
 
   async getResource(url) {
-    const res = await fetch(`${this._apiBase}${url}`, this.options);
+    try {
+      const res = await fetch(`${this._apiBase}${url}`, this.options);
 
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${this._apiBase}${url}, received ${res.status}`);
+      if (!res.ok) {
+        throw new Error(`Could not fetch ${this._apiBase}${url}, received ${res.status}`);
+      }
+      return await res.json();
+    } catch (err) {
+      console.error('Возникла проблема с fetch запросом: ', err.message);
+      return err.message;
     }
-    return await res.json();
   }
 
   async getMovies(query = 'return', numberPage = 1) {
