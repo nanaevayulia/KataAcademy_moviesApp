@@ -26,8 +26,8 @@ export default class MoviesDB {
     }
   }
 
-  async getMovies(query = 'return', numberPage = 1) {
-    const url = `search/movie?include_adult=false&query=${query}&page=${numberPage}&language=en-US`;
+  async getMovies(query, numberPage) {
+    const url = `search/movie?api_key=${this._apiKey}include_adult=false&query=${query}&page=${numberPage}&language=en-US`;
     return await this.getResource(url);
   }
 }
