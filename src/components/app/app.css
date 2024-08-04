@@ -1,3 +1,5 @@
-.ant-space {
-    display: flex;
+@media (max-width: 980px) {
+    .ant-spin {
+        margin-top: 20px;;
+    }
 }

@@ -4,3 +4,12 @@
     grid-gap: 36px;
     margin-bottom: 34px;
 }
+
+@media (max-width: 980px) {
+    .card-list {
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }  
+}

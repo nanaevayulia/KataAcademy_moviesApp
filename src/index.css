@@ -18,11 +18,18 @@ body {
 }
 
 #root {
-    min-width: 320px;
+    min-width: 420px;
     max-width: 1010px;
     min-height: 100vh;
     background-color: #fff;
     margin: auto;
     padding: 20px 35px;
     font-size: 12px;
+}
+
+@media (max-width: 980px) {
+    #root {
+        padding: 10px 16px 20px;
+    }
+    
 }
