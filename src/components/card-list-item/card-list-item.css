@@ -91,7 +91,7 @@ h4:where(.css-dev-only-do-not-override-1uq9j6g).ant-typography {
 
     .card-img {
         width: 60px;
-        min-height: 90px;
+        height: 90px;
         grid-row: 1/4;
     }
 
